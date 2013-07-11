@@ -17,8 +17,9 @@ module Wizard
 			end
 		end
 
-		traits :speed
+		traits :symbol, :speed
 
+		symbol ?c
 		speed 1
 
 		attr_reader :position
