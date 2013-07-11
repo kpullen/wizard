@@ -5,8 +5,16 @@ describe Creature do
 		class SimpleCreature < Creature
 			trait :arm_length
 			arm_length :long
+			speed 1
 		end
 		SimpleCreature.new
+	end
+
+	let :fast_creature do
+		class FastCreature < Creature
+			speed 2
+		end
+		FastCreature.new
 	end
 
 	it "has traits" do
@@ -33,4 +41,9 @@ describe Creature do
 		c.position.should eq [0, 0]
 	end
 
+	it "has a speed" do
+		c = fast_creature
+		c.move :north
+		c.position.should eq [0, 2]
+	end
 end

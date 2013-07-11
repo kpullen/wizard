@@ -2,9 +2,9 @@ module Wizard
 	class Creature
 		class << self
 			def trait a_trait
-				@traits ||= {}
 				attr_accessor a_trait
 				define_singleton_method a_trait do |value|
+					@traits ||= {}
 					@traits[a_trait] = value
 				end
 			end
@@ -17,6 +17,10 @@ module Wizard
 			end
 		end
 
+		traits :speed
+
+		speed 1
+
 		attr_reader :position
 		def initialize
 			self.class.traits.each do |name, value|
@@ -26,10 +30,10 @@ module Wizard
 		end
 
 		def move direction
-			[:north].include?(direction) && position[1] += 1
-			[:south].include?(direction) && position[1] -= 1
-			[:east].include?(direction) && position[0] += 1
-			[:west].include?(direction) && position[0] -= 1
+			[:north].include?(direction) && position[1] += @speed
+			[:south].include?(direction) && position[1] -= @speed
+			[:east].include?(direction) && position[0] += @speed
+			[:west].include?(direction) && position[0] -= @speed
 		end
 	end
 end
