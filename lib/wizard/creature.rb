@@ -24,6 +24,7 @@ module Wizard
 		attr_reader :position
 		def initialize
 			self.class.traits.each do |name, value|
+				value = value.call if value.is_a? Proc
 				self.send "#{name}=", value
 			end
 			@position = [0, 0]

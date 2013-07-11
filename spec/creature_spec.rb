@@ -17,8 +17,21 @@ describe Creature do
 		FastCreature.new
 	end
 
+	let :proc_creature do
+		class ProcCreature < Creature
+			trait :proc_please
+			proc_please -> { 1 }
+		end
+		ProcCreature.new
+	end
+
 	it "has traits" do
 		-> { simple_creature }.should_not raise_error
+	end
+
+	it "handles procified traits" do
+		c = proc_creature
+		c.proc_please.should eq 1
 	end
 
 	it "assigns traits on instance creation" do
